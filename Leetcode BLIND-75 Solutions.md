@@ -302,12 +302,14 @@ Explanation: The original array was $[1,2,3,4,5]$ rotated $3$ times.
 <summary>Approach</summary>
 <ul>
     Here, we need to find the pivot point where there is a break. $(3, 4), (4, 5), (5, 1), (1, 2)$ here, only $(5, 1)$ point has decreasing tuple. And by observation we can see that the left portion of the pivot is always be greater and right is always smaller. So, we can run Binary Search on that Pivot point, 
+    
 ```
-if nums[mid] >= nums[left
+if nums[mid] >= nums[left]
     search right portion
 else 
     search left portion.
 ```
+    
 But if the array is rotated $n$ times then it's already sorted. Here, our $nums[0]$ is the answer. So, our final result would be $min(nums[0], nums[right])$.
 
 </ul>
