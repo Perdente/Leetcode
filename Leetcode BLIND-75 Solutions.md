@@ -1,6 +1,9 @@
 
 153. Find Minimum in Rotated Sorted Array
-Suppose an array of length $n$ sorted in ascending order is rotated between $1$ and $n$ times. For example, the array nums = $[0,1,2,4,5,6,7]$ might become:
+<details>
+<summary>Find Minimum in Rotated Sorted Array</summary>
+<ul>
+    Suppose an array of length $n$ sorted in ascending order is rotated between $1$ and $n$ times. For example, the array nums = $[0,1,2,4,5,6,7]$ might become:
 
 $[4,5,6,7,0,1,2]$ if it was rotated $4$ times.
 $[0,1,2,4,5,6,7]$ if it was rotated $7$ times.
@@ -15,9 +18,11 @@ Example 1:
 Input: nums = $[3,4,5,1,2]$
 Output: $1$
 Explanation: The original array was $[1,2,3,4,5]$ rotated $3$ times.
-
-Approach:
-Here, we need to find the pivot point where there is a break. $(3, 4), (4, 5), (5, 1), (1, 2)$ here, only $(5, 1)$ point has decreasing tuple. And by observation we can see that the left portion of the pivot is always be greater and right is always smaller. So, we can run Binary Search on that Pivot point, 
+    
+<details>
+<summary>Approach</summary>
+<ul>
+    Here, we need to find the pivot point where there is a break. $(3, 4), (4, 5), (5, 1), (1, 2)$ here, only $(5, 1)$ point has decreasing tuple. And by observation we can see that the left portion of the pivot is always be greater and right is always smaller. So, we can run Binary Search on that Pivot point, 
 ```
 if nums[mid] >= nums[left
     search right portion
@@ -26,6 +31,13 @@ else
 ```
 But if the array is rotated $n$ times then it's already sorted. Here, our $nums[0]$ is the answer. So, our final result would be $min(nums[0], nums[right])$.
 
+</ul>
+</details>
+
+<details>
+<summary>Code</summary>
+<ul>
+    
 ```c++
 int findMin(vector<int>& nums) {
     int n = nums.size();
@@ -42,3 +54,10 @@ int findMin(vector<int>& nums) {
     return min(nums[0], nums[right]);
 }
 ```
+
+</ul>
+</details>
+
+</ul>
+</details>
+
