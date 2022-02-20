@@ -1,0 +1,25 @@
+
+<details>
+<summary>Problem Name</summary>
+<ul>
+    
+<details>
+<summary>Approach</summary>
+<ul>
+
+</ul>
+</details>
+
+<details>
+<summary>Code</summary>
+<ul>
+    
+```c++
+
+```
+
+</ul>
+</details>
+
+</ul>
+</details>
