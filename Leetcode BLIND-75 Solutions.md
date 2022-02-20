@@ -1,5 +1,51 @@
 
-153. Find Minimum in Rotated Sorted Array
+<details>
+<summary>Two Sum</summary>
+<ul>
+    Given an array of integers nums and an integer $target$, return indices of the two numbers such that they add up to $target$.
+
+You may assume that each input would have exactly one solution, and you may not use the same element twice.
+
+You can return the answer in any order.
+
+ 
+
+Example 1:
+
+Input: nums = $[2,7,11,15]$, target = $9$
+Output: $[0,1]$
+Explanation: Because $nums[0] + nums[1] == 9$, we return $[0, 1]$.
+<details>
+<summary>Approach</summary>
+<ul>
+Here, we always need to see $target - nums[i]$ if already interacted with us or not. if yes then answer exists.  
+</ul>
+</details>
+
+<details>
+<summary>Code</summary>
+<ul>
+    
+```c++
+vector<int> twoSum(vector<int>& nums, int target) {
+    map<int, int> mp;
+    vector<int> ans;
+    for (int i = 0; i < (int)nums.size(); ++i) {
+        if (mp.count(target - nums[i])) {
+            ans.push_back(i), ans.push_back(mp[target - nums[i]]); break;
+        }
+        mp[nums[i]] = i;
+    }
+    return ans;
+}
+```
+
+</ul>
+</details>
+
+</ul>
+</details>
+
 <details>
 <summary>Find Minimum in Rotated Sorted Array</summary>
 <ul>
