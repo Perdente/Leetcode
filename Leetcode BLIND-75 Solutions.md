@@ -97,7 +97,187 @@ int maxProfit(vector<int>& prices) {
 
 </ul>
 </details>
-   
+
+
+<details>
+<summary>Contains Duplicate</summary>
+<ul>
+    Given an integer array $nums$, return $true$ if any value appears at least twice in the array, and return $false$ if every element is distinct.
+Example 1:
+
+Input: nums = $[1,2,3,1]$
+Output: $true$
+<details>
+<summary>Approach</summary>
+<ul>
+Similar to Two Sum problem. insert value in set and check if it's already present or not.
+</ul>
+</details>
+
+<details>
+<summary>Code</summary>
+<ul>
+    
+```c++
+bool containsDuplicate(vector<int>& nums) {
+    set<int> st;
+    for (auto val: nums) {
+        if (st.count(val)) return true;
+        st.insert(val);
+    }
+    return false;
+}
+```
+
+</ul>
+</details>
+
+</ul>
+</details>
+    
+
+<details>
+<summary>Product of Array Except Self</summary>
+<ul>
+Given an integer array nums, return an array answer such that $answer[i]$ is equal to the product of all the elements of nums except $nums[i]$.
+
+The product of any prefix or suffix of nums is guaranteed to fit in a $32$-bit integer.
+
+You must write an algorithm that runs in $O(n)$ time and without using the division operation.
+
+Example 1:
+
+Input: nums = $[1,2,3,4]$
+Output: $[24,12,8,6]$    
+<details>
+<summary>Approach</summary>
+<ul>
+Here, for $i$ th index we need to calculate $prefix[i - 1] * sufix[i + 1]$.  
+</ul>
+</details>
+
+<details>
+<summary>Code</summary>
+<ul>
+    
+```c++
+
+vector<int> productExceptSelf(vector<int>& nums) {
+    int temp = 1;
+    int n = nums.size();
+    vector<int> prefix(n), suffix(n);
+    for (int i = 0; i < n; ++i) {
+        temp *= nums[i];
+        prefix[i] = temp;
+    }
+    temp = 1;
+    for (int i = n - 1; i >= 0; --i) {
+        temp *= nums[i];
+        suffix[i] = temp;
+    }
+    vector<int> ans(n);
+    for (int i = 0; i < n; ++i) {
+        int tot = 1;
+        if (i - 1 >= 0) tot *= prefix[i - 1];
+        if (i + 1 < n) tot *= suffix[i + 1];
+        ans[i] = tot;
+    }
+    return ans;
+}
+```
+
+</ul>
+</details>
+
+</ul>
+</details>
+
+
+<details>
+<summary>Maximum Subarray</summary>
+<ul>
+Given an integer array $nums$, find the contiguous subarray (containing at least one number) which has the largest $sum$ and return its $sum$.
+
+A subarray is a contiguous part of an array.
+
+Example 1:
+
+Input: nums = $[-2,1,-3,4,-1,2,1,-5,4]$
+Output: $6$
+Explanation: $[4,-1,2,1]$ has the largest sum = $6$.    
+<details>
+<summary>Approach</summary>
+<ul>
+Kadane's algorithm. We keep adding the $value$ to $sum$ until $sum$ is $(-ve)$. Each iteration we store the maximum $sum$ to $ans$ variable. return $ans$.
+</ul>
+</details>
+
+<details>
+<summary>Code</summary>
+<ul>
+    
+```c++
+int maxSubArray(vector<int>& nums) {
+    int ans = INT_MIN, sum = 0;
+    for (auto v: nums) {
+        sum += v;
+        ans = max(ans, sum);
+        sum = max(0, sum);
+    }
+    return ans;
+}
+```
+
+</ul>
+</details>
+
+</ul>
+</details>
+    
+
+<details>
+<summary>Maximum Product Subarray</summary>
+<ul>
+ Given an integer array $nums$, find a contiguous non-empty subarray within the array that has the $largest$ product, and return the product.
+
+The test cases are generated so that the answer will fit in a $32$-bit integer.
+
+A subarray is a contiguous subsequence of the array.
+
+Input: nums = $[2,3,-2,4]$
+Output: $6$
+Explanation: $[2,3]$ has the largest product $6$.   
+<details>
+<summary>Approach</summary>
+<ul>
+If there is no $(-ve)$ value or even number of $(-ve)$ values then answer is just total array multiplied.Here, either I can choose $i$ th index as a continuous sub-array element or I can start my new array with $i$ th index.  But when a $(-ve)$ value occurs then our maximum multiplied value is minimized and vice versa. So, we have to calculate both maximum multiplication and minimum multiplication till $i$ and if $(-ve)$ value occurs then we can simply swap both variable and calculate maximum out of it.
+</ul>
+</details>
+
+<details>
+<summary>Code</summary>
+<ul>
+    
+```c++
+int maxProduct(vector<int>& nums) {
+    int ma = 0, mi = 1000;
+    int ans = INT_MIN;
+    for (auto val: nums) {
+        if (val < 0) swap(ma, mi);
+        ma = max(val, val * ma);
+        mi = min(val, val * mi);
+        ans = max(ans, ma);
+    }
+    return ans;
+}
+```
+
+</ul>
+</details>
+
+</ul>
+</details>
+
     
 <details>
 <summary>Find Minimum in Rotated Sorted Array</summary>
