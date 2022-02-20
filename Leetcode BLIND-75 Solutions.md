@@ -46,6 +46,59 @@ vector<int> twoSum(vector<int>& nums, int target) {
 </ul>
 </details>
 
+ 
+<details>
+<summary>Best Time to Buy and Sell Stock</summary>
+<ul>
+    You are given an array prices where $prices[i]$ is the price of a given stock on the $i$th day.
+
+You want to maximize your profit by choosing a single day to buy one stock and choosing a different day in the future to sell that stock.
+
+Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return $0$.
+
+ 
+
+Example 1:
+
+Input: prices = $[7,1,5,3,6,4]$
+Output: $5$
+Explanation: Buy on day $2$ (price = $1$) and sell on day $5$ (price = $6$), profit = $6-1 = 5$.
+Note that buying on day $2$ and selling on day $1$ is not allowed because you must buy before you sell.
+<details>
+<summary>Approach</summary>
+<ul>
+Here, our left pointer must be lowest possible and right pointer is highest possible. So, we initialize left to be $0$ and right to be $1$. When we find nums[left] > nums[right] we update our left pointer with right. otherwise we calculate total distance.
+Final answer is the maximum total distance of left and right.
+    
+</ul>
+</details>
+
+<details>
+<summary>Code</summary>
+<ul>
+    
+```c++
+int maxProfit(vector<int>& prices) {
+    int left = 0, right = 1, ma = 0;
+    while (right < (int)prices.size()) {
+        if (prices[left] > prices[right]) {
+            left = right;
+        } else {
+            ma = max(ma, prices[right] - prices[left]);
+        }
+        right++;
+    }
+    return ma;
+}
+```
+
+</ul>
+</details>
+
+</ul>
+</details>
+   
+    
 <details>
 <summary>Find Minimum in Rotated Sorted Array</summary>
 <ul>
