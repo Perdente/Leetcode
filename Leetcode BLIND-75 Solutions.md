@@ -67,7 +67,7 @@ Note that buying on day $2$ and selling on day $1$ is not allowed because you mu
 <details>
 <summary>Approach</summary>
 <ul>
-Here, our left pointer must be lowest possible and right pointer is highest possible. So, we initialize left to be $0$ and right to be $1$. When we find nums[left] > nums[right] we update our left pointer with right. otherwise we calculate total distance.
+Here, our left pointer must be lowest possible and right pointer is highest possible. So, we initialize left to be $0$ and right to be $1$. When we find $nums[left] > nums[right]$ we update our left pointer with right. otherwise we calculate total distance.
 Final answer is the maximum total distance of left and right.
     
 </ul>
