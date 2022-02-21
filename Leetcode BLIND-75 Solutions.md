@@ -341,4 +341,65 @@ int findMin(vector<int>& nums) {
 
 </ul>
 </details>
+    
+    
+<details>
+<summary>Search in Rotated Sorted Array</summary>
+<ul>
+There is an integer array $nums$ sorted in ascending order (with _distinct_ values).
+
+Prior to being passed to your function, $nums$ is possibly rotated at an unknown pivot index $k (1 <= k < nums.length)$ such that the resulting array is $[nums[k], nums[k+1], ..., nums[n-1], nums[0], nums[1], ..., nums[k-1]] (0-indexed)$
+
+Given the array nums after the possible rotation and an integer $target$, return the index of target if it is in nums, or $-1$ if it is not in nums.
+
+You must write an algorithm with $O(log n)$ runtime complexity.
+
+ 
+
+Example 1:
+
+Input: nums = $[4,5,6,7,0,1,2]$, target = $0$
+Output: $4$   
+<details>
+<summary>Approach</summary>
+<ul>
+    Here, there is two portion of sorted array. We need to check in which part our $target$ value appears. If $nums[left] <= nums[mid]$ then we are in the left portion. Now if our $target$ value is inside this left portion we search in $left$ or vice versa.
+                                                                                                                       
+</ul>
+</details>
+
+<details>
+<summary>Code</summary>
+<ul>
+    
+```c++
+int search(vector<int>& nums, int target) {
+    int n = nums.size();
+    int left = 0, right = n - 1;
+    while (left <= right) {
+        int mid = (left + right) / 2;
+        if (nums[mid] == target) return mid;
+        if (nums[left] <= nums[mid]) {
+            if (nums[left] <= target and target <= nums[mid]) {
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        } else {
+            if (nums[mid] <= target and target <= nums[right]) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+    }
+    return -1;
+}
+```
+
+</ul>
+</details>
+
+</ul>
+</details>
 
