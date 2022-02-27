@@ -516,3 +516,141 @@ public:
 
 </ul>
 </details>
+    
+
+<details>
+<summary>Number of 1 Bits</summary>
+<ul>
+    Write a function that takes an unsigned integer and returns the number of $'1'$ bits it has (also known as the Hamming weight).
+<details>
+<summary>Approach</summary>
+<ul>
+
+</ul>
+</details>
+
+<details>
+<summary>Code</summary>
+<ul>
+    
+```c++
+class Solution {
+public:
+    int hammingWeight(uint32_t n) {
+        int cnt=0;
+        while(n){
+          cnt++;
+          n&=(n-1);
+        }
+        return cnt;
+    }
+};
+    
+class Solution {
+public:
+    int hammingWeight(uint32_t n) {
+        return __builtin_popcount(n);
+    }
+};
+```
+
+</ul>
+</details>
+
+</ul>
+</details>
+    
+<details>
+<summary>Counting Bits</summary>
+<ul>
+Given an integer $n$, return an array ans of length $n + 1$ such that for each $i (0 <= i <= n)$, $ans[i]$ is the number of $1's$ in the binary representation of $i$.
+
+ 
+<details>
+<summary>Approach</summary>
+<ul>
+
+</ul>
+</details>
+
+<details>
+<summary>Code</summary>
+<ul>
+    
+```c++
+class Solution {
+public:
+    vector<int> countBits(int num) {
+        vector<int> ans;
+        for (int i = 0; i <= num; ++i) {
+            ans.push_back(__builtin_popcount(i));
+        }
+        return ans;
+    }
+};
+```
+
+</ul>
+</details>
+
+</ul>
+</details>
+
+
+
+<details>
+<summary>Missing Number / MEX</summary>
+<ul>
+    Given an array $nums$ containing $n$ distinct numbers in the range $[0, n]$, return the only number in the range that is missing from the array.
+<details>
+<summary>Approach</summary>
+<ul>
+Here, we use a $set$ to store the values. Whenever, we've a $MEX$ we increment our $MEX$ value. Total time complexity $O(n2)$. 
+Using XOR, we can first xor with $[0, n]$ and then xor it with the whole array. Only one value is not gonna cancel out which is our answer. Complexity $O(n)$
+Using total sum, we know that sum for $[0, n]$ is $n * (n + 1) / 2$. So, we can keep decrement our sum from the array value and final sum is returned.Complexity $O(n)$
+</ul>
+</details>
+
+<details>
+<summary>Code</summary>
+<ul>
+    
+```c++
+class Solution {
+public:
+    int missingNumber(vector<int>& nums) {
+        int mex = 0;
+        set<int> st;
+        for (auto val: nums) {
+            st.insert(val);
+            while (st.count(mex)) mex++;
+        }
+        return mex;
+    }
+};
+class Solution {
+public:
+    int missingNumber(vector<int>& nums) {
+        int x = 0;
+        int n = nums.size();
+        for (int i = 0; i <= n; ++i) x ^= i;
+        for (auto v: nums) x ^= v;
+        return x;
+    }
+};
+class Solution {
+public:
+    int missingNumber(vector<int>& nums) {
+        int n = nums.size();
+        int sum = n * (n + 1) / 2;
+        for (auto val: nums) sum -= val;
+        return sum;
+    }
+};                              
+```
+
+</ul>
+</details>
+
+</ul>
+</details>
