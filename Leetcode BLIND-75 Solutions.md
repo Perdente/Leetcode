@@ -654,3 +654,141 @@ public:
 
 </ul>
 </details>
+    
+
+<details>
+<summary>Reverse Bits</summary>
+<ul>
+    Reverse bits of a given $32$ bits unsigned integer.
+    Input: $n = 00000010100101000001111010011100$
+Output:    $964176192 (00111001011110000010100101000000)$
+Explanation: The input binary string $00000010100101000001111010011100$ represents the unsigned integer $43261596$, so return $964176192$ which its binary representation is $00111001011110000010100101000000$.
+<details>
+<summary>Approach</summary>
+<ul>
+
+</ul>
+</details>
+
+<details>
+<summary>Code</summary>
+<ul>
+    
+```c++
+class Solution {
+public:
+    uint32_t reverseBits(uint32_t n) {
+        int ans = 0;
+        for (int mask = 31; mask >= 0; --mask) {
+            if (n & (1 << mask)) ans += (1 << (31 - mask));
+        }
+        return ans;
+    }
+};
+```
+
+</ul>
+</details>
+
+</ul>
+</details>
+    
+<details>
+<summary>Climbing Stairs</summary>
+<ul>
+ You are climbing a staircase. It takes $n$ steps to reach the top.
+
+Each time you can either climb $1$ or $2$ steps. In how many distinct ways can you climb to the top?
+
+Example 1:
+
+Input: $n = 2$
+Output: $2$
+Explanation: There are two ways to climb to the top.
+1. 1 step + 1 step
+2. 2 steps   
+<details>
+<summary>Approach</summary>
+<ul>
+Here, each step $(step >= 2)$ depends on it's two previous values. So, dp state would be $dp[i] = dp[i-1] + dp[i - 2]$
+</ul>
+</details>
+
+<details>
+<summary>Code</summary>
+<ul>
+    
+```c++
+class Solution {
+public:
+    int climbStairs(int n) {
+        vector<int> dp(n + 1);
+        dp[0] = 1, dp[1] = 1;
+        for (int i = 2; i <= n; ++i) {
+            if (i - 1 >= 0) dp[i] += dp[i - 1];
+            if (i - 2 >= 0) dp[i] += dp[i - 2];
+        }
+        return dp[n];
+    }
+};
+```
+
+</ul>
+</details>
+
+</ul>
+</details>
+
+    
+
+
+<details>
+<summary>Coin Change</summary>
+<ul>
+    You are given an integer array coins representing coins of different denominations and an integer amount representing a total amount of money.
+
+Return the $fewest$ number of coins that you need to make up that amount. If that amount of money cannot be made up by any combination of the coins, return $-1$.
+
+You may assume that you have an infinite number of each kind of coin.
+
+ 
+
+Example 1:
+
+Input: coins = $[1,2,5]$, amount = $11$
+Output: $3$
+Explanation: $11 = 5 + 5 + 1$
+<details>
+<summary>Approach</summary>
+<ul>
+Here, we only add $i$th coin if $amount - coin[i]$ exists. So, our dp state would be $dp[i] = min (dp[i], 1 + dp[sum - coin[i]])$
+</ul>
+</details>
+
+<details>
+<summary>Code</summary>
+<ul>
+    
+```c++
+class Solution {
+    const int oo = 1e9 + 5;
+public:
+    int coinChange(vector<int>& coins, int amount) {
+        int n = coins.size(), sum = amount;
+        vector<int> dp(sum + 1, oo);
+        dp[0] = 0;
+        for (int i = 1; i <= sum; ++i) {
+            for (auto j: coins) {
+                if (i - j >= 0) dp[i] = min(dp[i], 1 + dp[i - j]);
+            }
+        }
+        return dp[sum] == oo ? -1 : dp[sum];
+    }
+};
+```
+
+</ul>
+</details>
+
+</ul>
+</details>
