@@ -403,3 +403,56 @@ int search(vector<int>& nums, int target) {
 </ul>
 </details>
 
+<details>
+<summary>3Sum</summary>
+<ul>
+    Given an integer array $nums$, return all the triplets $[nums[i], nums[j], nums[k]]$ such that $i != j, i != k, and j != k$ and $nums[i] + nums[j] + nums[k] == 0$.
+
+Notice that the solution set must not contain duplicate triplets.
+
+Example 1:
+
+Input: nums = $[-1,0,1,2,-1,-4]$
+Output: $[[-1,-1,2],[-1,0,1]]$
+<details>
+<summary>Approach</summary>
+<ul>
+Here, after sorting the array we first fix the first value and then use two pointer to get the next two values. As the triplets can't contain any duplicate so we increase our pointer when we have adjacent elements equal. Here, $j$ th index is the rightmost value and we don't need to check for adjacent here, as it's been processed in main $while$ loop
+</ul>
+</details>
+
+<details>
+<summary>Code</summary>
+<ul>
+    
+```c++
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        sort(nums.begin(), nums.end());
+        vector<vector<int>> ans;
+        int n = nums.size();
+        for (int k = 0; k < n; ++k) {
+            while(k and k < n and nums[k] == nums[k - 1]) k++;
+            int i = k + 1, j = n - 1;
+            while (i < j) {
+                int sum = nums[i] + nums[j] + nums[k];
+                if (sum > 0) j--;
+                else if (sum < 0) i++;
+                else {
+                   ans.push_back({nums[k], nums[i], nums[j]});
+                   i++;
+                   while (i < j and nums[i] == nums[i - 1]) i++; 
+                }
+            }
+        }
+        return ans;
+    }
+};
+```
+
+</ul>
+</details>
+
+</ul>
+</details>
