@@ -792,3 +792,47 @@ public:
 
 </ul>
 </details>
+    
+    
+<details>
+<summary>Longest Increasing Subsequence</summary>
+<ul>
+Given an integer array nums, return the length of the longest strictly increasing subsequence.
+
+A subsequence is a sequence that can be derived from an array by deleting some or no elements without changing the order of the remaining elements. For example, $[3,6,2,7]$ is a subsequence of the array $[0,3,1,6,2,2,7]$  
+<details>
+<summary>Approach</summary>
+<ul>
+Here, dp solution is $O(n^2)$. Here, for each index value we calculate LIS. If $i$ th index is stictly greater then we can add the value to the answer. Finally answer is maximum for each index.
+</ul>
+</details>
+
+<details>
+<summary>Code</summary>
+<ul>
+    
+```c++
+class Solution {
+public:
+    int lengthOfLIS(vector<int>& nums) {
+        int n = nums.size();
+        vector<int> LIS(n, 1);
+        for (int i = 0; i < n; ++i) {
+            for (int j = 0; j < i; ++j) {
+                if (nums[i] > nums[j]) {
+                    LIS[i] = max(LIS[i], 1 + LIS[j]);
+                }
+            }
+        }
+        int ans = INT_MIN;
+        for (auto v: LIS) ans = max(ans, v);
+        return ans;
+    }
+};
+```
+
+</ul>
+</details>
+
+</ul>
+</details>
