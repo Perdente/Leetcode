@@ -985,10 +985,11 @@ These are the only two combinations.
 <details>
 <summary>Approach</summary>
 <ul>
+Similar to Coin Combination II.
 
 </ul>
 </details>
-Similar to Coin Combination II.
+
 <details>
 <summary>Code</summary>
 <ul>
