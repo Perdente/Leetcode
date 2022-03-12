@@ -836,3 +836,62 @@ public:
 
 </ul>
 </details>
+    
+<details>
+<summary>Longest Common Subsequence</summary>
+<ul>
+Given two strings $text1$ and $text2$, return the length of their longest common subsequence. If there is no common subsequence, return $0$.
+
+A subsequence of a string is a new string generated from the original string with some characters (can be none) deleted without changing the relative order of the remaining characters.
+
+For example, $ace$ is a subsequence of $abcde$.
+A common subsequence of two strings is a subsequence that is common to both strings.
+
+ 
+
+Example 1:
+
+Input: text1 = "abcde", text2 = "ace" 
+Output: 3  
+Explanation: The longest common subsequence is $ace$ and its length is $3$. 
+    
+<details>
+<summary>Approach</summary>
+<ul>
+Here, we will use top down approach. If $i$ the and $j$ th character matched then we will find solution for $i + 1$ and $j + 1$ character. Otherwise, we will find the maximum for $i + 1$ character for string 1 and $j + 1$ character for string 2.
+</ul>
+</details>
+
+<details>
+<summary>Code</summary>
+<ul>
+    
+```c++
+class Solution {
+    int dp[1004][1004];
+    int lcs(int i, int j, string &text1, string &text2) {
+        int n = text1.size(), m = text2.size();
+        if (i == n or j == m) return 0;
+        if (dp[i][j] != -1) return dp[i][j];
+        if (text1[i] == text2[j]) return lcs(i + 1, j + 1, text1, text2) + 1;
+        int x = 0, y = 0;
+        x = lcs(i + 1, j, text1, text2);
+        y = lcs(i, j + 1, text1, text2);
+        // cout << dp[i][j] << endl;
+        return dp[i][j] = max(x, y);
+    }
+public:
+    
+    
+    int longestCommonSubsequence(string text1, string text2) {
+        memset(dp, -1, sizeof dp);
+        return lcs(0, 0, text1, text2);
+    }
+};
+```
+
+</ul>
+</details>
+
+</ul>
+</details>
