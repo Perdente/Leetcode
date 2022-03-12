@@ -895,3 +895,67 @@ public:
 
 </ul>
 </details>
+    
+<details>
+<summary>Word Break</summary>
+<ul>
+Given a string $s$ and a dictionary of strings $wordDict$ , return $true$ if $s$ can be segmented into a space-separated sequence of one or more dictionary words.
+
+> Note that the same word in the dictionary may be reused multiple times in the segmentation.
+
+ 
+
+Example 1:
+
+Input: s = "leetcode", wordDict = ["leet","code"]
+    
+Output: true
+    
+Explanation: Return true because "$leetcode$" can be segmented as "$leet$" "$code$".
+<details>
+<summary>Approach</summary>
+<ul>
+Here, we check from $s$ string if any string from $st$ is present or not ; starting from index $pos$. So, for each recursive call we start from $pos$ index and look for a substring of length $i - pos + 1$ each time and check if this substring is present in our $st$. If present we search for $i + 1$ th index and if no substring matches then we return $false$.
+</ul>
+</details>
+
+<details>
+<summary>Code</summary>
+<ul>
+    
+```c++
+class Solution {
+    
+public:
+    // const int N = 1e3 + 4;
+    int dp[1004];
+    bool rec(int pos, string &s, set<string> &st) {
+        if (pos >= (int)s.size()) return true;
+        if (dp[pos] != -1) return dp[pos];
+
+        for (int i = pos; i < (int)s.size(); ++i) {
+            string temp = s.substr(pos, i - pos + 1);
+            if (st.count(temp)) {
+                if (rec(i + 1, s, st)) {
+                    cout << temp << " " << pos << '\n';
+                    return dp[pos] = true;
+                }
+            }
+        }
+        return dp[pos] = false;
+    }
+
+    bool wordBreak(string s, vector<string>& wordDict) {    
+        set<string> st;
+        for (auto it: wordDict) st.insert(it);
+        memset(dp, -1, sizeof dp);
+        return rec(0, s, st);
+    }
+};
+```
+
+</ul>
+</details>
+
+</ul>
+</details>
