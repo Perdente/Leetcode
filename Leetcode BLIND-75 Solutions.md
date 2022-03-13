@@ -1190,3 +1190,82 @@ public:
     
 </ul>
 </details>
+    
+    
+    
+<details>
+<summary>Decode Ways</summary>
+<ul>
+ A message containing letters from $A-Z$ can be encoded into numbers using the following mapping:
+
+```
+'A' -> "1"
+'B' -> "2"
+...
+'Z' -> "26"
+```
+
+To decode an encoded message, all the digits must be grouped then mapped back into letters using the reverse of the mapping above (there may be multiple ways). For example, "$11106$" can be mapped into:
+
+"$AAJF$" with the grouping $(1 1 10 6)$
+"$KJF$" with the grouping $(11 10 6)$
+Note that the grouping $(1 11 06)$ is invalid because "$06$" cannot be mapped into '$F$' since "$6$" is different from "$06$".
+
+Given a string s containing only digits, return the number of ways to decode it.
+
+The test cases are generated so that the answer fits in a $32$-bit integer.
+
+ 
+
+Example 1:
+
+Input: s = "$12$"
+Output: $2$
+Explanation: "$12$" could be decoded as "$AB$" $(1 2)$ or "$L$" $(12)$.   
+
+<details>
+<summary>Approach</summary>
+<ul>
+
+Say our string is $2126$, and we are at $1st$ position. So, can we include our next character $2$ in our answer? Well, we can if the next digit is $1 <= digit <= 9$. If the digit is $0$ then it can't contribute to the answer. Again, can we include next two digits? Yes until $26$ we have valid mapping. So, we check for next two digit if it's $10 <= two_digit <= 26$. If we reach the end of the string, then we've successfully completed one valid string, so $return 1$
+
+</ul>
+</details>
+
+<details>
+<summary>Code</summary>
+<ul>
+    
+```c++
+class Solution {
+public:
+    int dp[105];
+    int rec(int i, string s) {
+        int n = s.size();
+        if (i >= n) return 1;
+        if (dp[i] != -1) return dp[i];
+        
+        int ways = 0;
+        
+        int one_digit = s[i] - '0';
+        if (1 <= one_digit and one_digit <= 9) ways += rec(i + 1, s);
+        
+        if (i + 1 < n) {
+            int two_digit = (s[i] - '0') * 10 + (s[i + 1] - '0');
+            if (10 <= two_digit and two_digit <= 26) ways += rec(i + 2, s);
+        }
+        return dp[i] = ways;
+    }
+    
+    int numDecodings(string s) {
+        memset(dp, -1, sizeof dp);
+        return rec(0, s);
+    }
+};
+```
+
+</ul>
+</details>
+
+</ul>
+</details>
