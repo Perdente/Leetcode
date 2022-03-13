@@ -1024,3 +1024,81 @@ public:
 
 </ul>
 </details>
+    
+    
+<details>
+<summary>House Robber</summary>
+<ul>
+You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that $adjacent$ houses have security systems connected and it will automatically contact the police if $two$ adjacent houses were broken into on the same night.
+
+Given an integer array $nums$ representing the amount of money of each house, return the maximum amount of money you can rob tonight without alerting the police.
+
+ 
+
+Example 1:
+
+Input: nums = $[1,2,3,1]$
+Output: $4$
+Explanation: Rob house $1$ (money = $1$) and then rob house $3$ (money = $3$).
+Total amount you can rob = $1 + 3 = 4$.    
+<details>
+<summary>Approach</summary>
+<ul>
+Here, if we take values fron $i$ th house we have to take from $i + 2$ th house, we can't take from $i + 1$th house. So, our recurrence relation would be $$dp[i] = max(dp[i-1],nums[i] + dp[i - 2])$$.
+</ul>
+</details>
+
+<details>
+<summary>Code_iterative</summary>
+<ul>
+    
+```c++
+class Solution {
+public:
+    int rob(vector<int>& nums) {
+        int n=nums.size();
+        if(n==1)return nums[0];
+        vector<int> dp(n);
+        dp[0]=nums[0];
+        dp[1]=max(nums[0],nums[1]);
+        for(int i=2;i<n;++i){
+            dp[i]=max(dp[i-1],dp[i-2]+nums[i]);
+        }
+        
+        return dp[n-1];
+    }
+};
+```
+
+</ul>
+</details>
+
+ <details>
+<summary>Code_recursive</summary>
+<ul>
+    
+```c++
+class Solution {
+public:
+    int dp[406];
+    int rec(int i, vector<int> v) {
+        int n = v.size();
+        if (i >= n) return 0;
+        if (dp[i] != -1) return dp[i];
+        int x = rec(i + 1, v);
+        int y = v[i] + rec(i + 2, v);
+        return dp[i] = max(x, y);
+    }
+    
+    int rob(vector<int>& nums) {
+        memset(dp, -1, sizeof dp);
+        return rec(0, nums);
+    }
+};
+```
+
+</ul>
+</details>
+
+</ul>
+</details>
