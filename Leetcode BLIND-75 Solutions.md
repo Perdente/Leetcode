@@ -1161,27 +1161,32 @@ public:
 ```c++
 class Solution {
 public:
+    int dp[1005];
+    
+    int rec(int i, int end, vector<int> v) {
+        int n = v.size();
+        if (i > end) return 0;
+        if (dp[i] != -1) return dp[i];
+        int x = rec(i + 1, end, v);
+        int y = v[i] + rec(i + 2, end, v);
+        return dp[i] = max(x, y);
+    }
+    
     int rob(vector<int>& nums) {
-        int n=nums.size();
-        if(n==1)return nums[0];
-        if(n==2)return max(nums[0],nums[1]);
-        vector<int> dp(n),dp1(n);
-        dp[0]=nums[0];
-        dp[1]=max(nums[0],nums[1]);
-        for(int i=2;i<n-1;++i){
-            dp[i]=max(dp[i-1],dp[i-2]+nums[i]);
-        }
-        dp1[1]=nums[1];
-        dp1[2]=max(nums[1],nums[2]);
-        for(int i=3;i<n;++i){
-            dp1[i]=max(dp1[i-1],dp1[i-2]+nums[i]);
-        }
-        return max(dp[n-2],dp1[n-1]);
+        memset(dp, -1, sizeof dp);
+        int n = nums.size();
+        if (n == 1) return nums[0];
+        int x = rec(0, n - 2, nums);
+        memset(dp, -1, sizeof dp);
+        int y = rec(1, n - 1, nums);
+        return max(x, y);
+        
     }
 };
 ```
 
 </ul>
 </details>
+    
 </ul>
 </details>
