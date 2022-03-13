@@ -1313,3 +1313,64 @@ public:
 
 </ul>
 </details>
+    
+    
+<details>
+<summary>Jump Game</summary>
+<ul>
+You are given an integer array $nums$. You are initially positioned at the array's $1st$ index, and each element in the array represents your maximum jump length at that position.
+
+Return $true$ if you can reach the $last$ index, or $false$ otherwise.
+
+ 
+
+Example 1:
+
+Input: nums = $[2,3,1,1,4]$
+Output: $true$
+Explanation: Jump $1$ step from index $0$ to $1$, then $3$ steps to the last index.
+    
+<details>
+<summary>Approach</summary>
+<ul>
+Here, from each particular position we calculate how far we can go. Next, we try for that farthest point how much we can go from there. If we reach greater or equal $n - 1$ th position we can reach the end. But if our second value is less than first value answer is false; 
+</ul>
+</details>
+
+<details>
+<summary>Code</summary>
+<ul>
+    
+```c++
+class Solution {
+public:
+    
+    bool canJump(vector<int>& nums) {
+        int n = nums.size();
+        int jump = 0;
+        pair<int, int> interval = {0, 0};
+        while (true) {
+            jump++;
+            int maxReach = -1;
+            for (int i = interval.first; i <= interval.second; ++i) {
+                maxReach = max(maxReach, i + nums[i]);
+            }
+            if (maxReach >= n - 1) {
+                cout << jump << '\n';
+                return true;
+            }
+            interval = {interval.second + 1, maxReach};
+            if (interval.first > interval.second) return false;
+        }
+    }
+};
+```
+
+</ul>
+</details>
+
+</ul>
+</details>
+    
+     
+ 
