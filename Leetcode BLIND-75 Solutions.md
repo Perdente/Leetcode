@@ -1102,3 +1102,86 @@ public:
 
 </ul>
 </details>
+    
+    
+<details>
+<summary>House Robber II</summary>
+<ul>
+You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed. All houses at this place are arranged in a circle. That means the first house is the neighbor of the last one. Meanwhile, adjacent houses have a security system connected, and it will automatically contact the police if two adjacent houses were broken into on the same night.
+
+Given an integer array nums representing the amount of money of each house, return the maximum amount of money you can rob tonight without alerting the police.
+
+Example 1:
+
+Input: nums = $[2,3,2]$
+Output: $3$
+Explanation: You cannot rob house $1$ (money = $2$) and then rob house $3$ (money = $2$), because they are adjacent houses.   
+<details>
+<summary>Approach</summary>
+<ul>
+The main difference between H_R1 and H_R2 is that here we can't calculate dp values for $nums[0]$ and $nums[n-1]$ together as they are adjacent. But we can use two dp arrays $1$st $[0,n-2]$ and $2$nd $[1,n-1]$ skipping both first and last values.Final answer is $max(dp[n - 1], dp[n - 2])$
+</ul>
+</details>
+
+<details>
+<summary>Code_iterative</summary>
+<ul>
+    
+```c++
+class Solution {
+public:
+    int rob(vector<int>& nums) {
+        int n=nums.size();
+        if(n==1)return nums[0];
+        if(n==2)return max(nums[0],nums[1]);
+        vector<int> dp(n),dp1(n);
+        dp[0]=nums[0];
+        dp[1]=max(nums[0],nums[1]);
+        for(int i=2;i<n-1;++i){
+            dp[i]=max(dp[i-1],dp[i-2]+nums[i]);
+        }
+        dp1[1]=nums[1];
+        dp1[2]=max(nums[1],nums[2]);
+        for(int i=3;i<n;++i){
+            dp1[i]=max(dp1[i-1],dp1[i-2]+nums[i]);
+        }
+        return max(dp[n-2],dp1[n-1]);
+    }
+};
+```
+
+</ul>
+</details>
+
+
+<details>
+<summary>Code_recursive</summary>
+<ul>
+    
+```c++
+class Solution {
+public:
+    int rob(vector<int>& nums) {
+        int n=nums.size();
+        if(n==1)return nums[0];
+        if(n==2)return max(nums[0],nums[1]);
+        vector<int> dp(n),dp1(n);
+        dp[0]=nums[0];
+        dp[1]=max(nums[0],nums[1]);
+        for(int i=2;i<n-1;++i){
+            dp[i]=max(dp[i-1],dp[i-2]+nums[i]);
+        }
+        dp1[1]=nums[1];
+        dp1[2]=max(nums[1],nums[2]);
+        for(int i=3;i<n;++i){
+            dp1[i]=max(dp1[i-1],dp1[i-2]+nums[i]);
+        }
+        return max(dp[n-2],dp1[n-1]);
+    }
+};
+```
+
+</ul>
+</details>
+</ul>
+</details>
