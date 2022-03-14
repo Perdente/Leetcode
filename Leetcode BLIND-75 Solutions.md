@@ -1371,6 +1371,66 @@ public:
 
 </ul>
 </details>
+  
+<details>
+<summary> Course Schedule</summary>
+<ul>
+There are a total of numCourses courses you have to take, labeled from $0$ to $numCourses - 1$. You are given an array prerequisites where $prerequisites[i] = [a_i, b_i]$ indicates that you must take course $b_i$ first if you want to take course $a_i$.
+
+For example, the pair $[0, 1]$, indicates that to take course $0$ you have to first take course $1$.
+Return $true$ if you can finish all courses. Otherwise, return $false$.
+<details>
+<summary>Approach</summary>
+<ul>
+Prerequisite: Cycle detection in a directed graph
+Here, unlike undirected graph we use two $visited$ array. If one of the nodes work is ended then we before going to backtrack make our first $visited[node] = false$ as we can visit this same node via different path. In some case if both the $visted$ array value is $true$ then we are sure that there is a cycle. In this problem, if cycle is detected then return $false$ or vice-versa.  
+</ul>
+</details>
+
+<details>
+<summary>Code</summary>
+<ul>
     
+```c++
+class Solution {
+public:
+    vector<int> g[100005];
+    bool vis[100005], dfsVis[100005];
+    
+    bool dfs(int u) {
+        vis[u] = true;
+        dfsVis[u] = true;
+        for (auto v: g[u]) {
+            if (!vis[v]) {
+                if (dfs(v)) return true;
+            } else if (dfsVis[v]) return true;
+        }
+        dfsVis[u] = false;
+        return false;
+    }
+    
+    bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
+        memset(vis, false, sizeof vis);
+        memset(dfsVis, false, sizeof dfsVis);
+        for (int i = 0; i < (int) prerequisites.size(); ++i) {
+            int u = prerequisites[i][0], v = prerequisites[i][1];
+            g[u].push_back(v);
+        }
+        for (int i = 0; i < numCourses; ++i) {
+            if (!vis[i]) {
+                if (dfs(i)) return false;
+            }    
+        }
+        return true;
+    }
+    
+};
+```
+
+</ul>
+</details>
+
+</ul>
+</details>
      
  
