@@ -1563,3 +1563,80 @@ public:
 </ul>
 </details>
  
+<details>
+<summary>Alien Dictionary </summary>
+<ul>
+Given a sorted dictionary of an alien language having $N$ words and $k$ starting alphabets of standard dictionary. Find the order of characters in the alien language.
+https://practice.geeksforgeeks.org/problems/alien-dictionary/1#
+```
+Input: 
+N = 5, K = 4
+dict = {"baa","abcd","abca","cab","cad"}
+Output:
+1
+Explanation:
+Here order of characters is 
+'b', 'd', 'a', 'c' Note that words are sorted 
+and in the given language "baa" comes before 
+"abcd", therefore 'b' is before 'a' in output.
+Similarly we can find other orders.
+```
+<details>
+<summary>Approach</summary>
+<ul>
+Prerequisite : Topological sorting. Here, from two adjacent element from the string array the character that came before is lexicographically smaller. So, we can have a directed graph whose parent node is bigger and child node is lexicographically smaller according to alien dictionary.
+
+ $dict = {"baa","abcd","abca","cab","cad"}$ here, the directed graph looks like
+    b -> a -> c
+    b -> d -> a
+So, we can use dfs traversal and while backtracking we push back the last visited character into a string. Finally, we have our final string as decending order. We need to reverse the string to get our answer :) 
+    
+</ul>
+</details>
+
+<details>
+<summary>Code</summary>
+<ul>
+    
+```c++
+class Solution{
+    public:
+    
+    void dfs(int u, vector<vector<int>> &graph, vector<bool> &vis, string &ans) {
+        vis[u] = true;
+        for (auto v: graph[u]) {
+            if (!vis[v]) dfs(v, graph, vis, ans);
+        }
+        ans += (char)u + 'a'; 
+    }
+    string findOrder(string dict[], int N, int K) {
+        vector<vector<int>> graph(K);
+        for (int i = 0; i < (int) N - 1; ++i) {
+            string a = dict[i], b = dict[i + 1];
+            int n = min((int) a.size(), (int) b.size());
+            for (int ch = 0; ch < n; ++ch) {
+                if (a[ch] != b[ch]) {
+                    graph[a[ch] - 'a'].push_back(b[ch] - 'a');
+                    break;
+                }
+            }
+        }
+        vector<bool> vis(K);
+        string ans;
+        for (int i = 0; i < K; ++i) {
+            if (!vis[i]) {
+                dfs(i, graph, vis, ans);
+            }
+        }
+        reverse(ans.begin(), ans.end());
+        return ans;
+    }
+};
+```
+
+</ul>
+</details>
+
+</ul>
+</details>
+ 
