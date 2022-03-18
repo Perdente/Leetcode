@@ -1643,3 +1643,78 @@ class Solution{
 </ul>
 </details>
  
+    
+    
+<details>
+<summary>Graph Valid Tree</summary>
+<ul>
+Given $n$ nodes labeled from $0$ to $n - 1$ and a list of undirected edges (each edge is a pair of nodes), write a function to check whether these edges make up a valid tree. 
+
+```
+Input: n = 5 edges = [[0, 1], [1, 2], [2, 3], [1, 3], [1, 4]]
+Output: false.
+```
+
+<details>
+<summary>Approach</summary>
+<ul>
+
+> Conditions for a graph to be a tree - 
+- Undirected graph.
+- Always single component graph.
+- Can't have any cycles.
+
+> Conditions for a graph having cycle -
+- A graph with $n$ vertices is a tree if and only if it has $n - 1$ edges.
+- While traversing a graph if a node is visited twice and it's not a parent node, then the graph must contains a cycle.
+    
+
+</ul>
+</details>
+
+<details>
+<summary>Code</summary>
+<ul>
+    
+```c++
+class Solution {
+public:
+
+    bool dfs(int u, int parent, vector<bool> &vis, vector<vector<int>> &g) {
+        vis[u] = true;
+        for (auto v: g[u]) {
+            if (!vis[v]) {
+                if (dfs(v, u, vis, g)) return true;
+            }
+            else if (v != parent) return true; 
+        }
+        return false;
+    } 
+
+    bool validTree(int n, vector<vector<int>> &edges) {
+        vector<bool> vis(n);
+        int m = edges.size();
+        vector<vector<int>> g(n);
+        for (int i = 0; i < m; ++i) {
+            g[edges[i][0]].push_back(edges[i][1]);
+            g[edges[i][1]].push_back(edges[i][0]);
+        }
+        int cnt = 0;
+        for (int i = 0; i < n; ++i) {
+            if (!vis[i]) {
+                cnt++;
+                if (dfs(i, -1, vis, g)) {
+                    return false; 
+                }
+            } 
+        }
+        return (cnt == 1);
+    }
+};
+```
+
+</ul>
+</details>
+
+</ul>
+</details>
