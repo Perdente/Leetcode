@@ -1568,6 +1568,7 @@ public:
 <ul>
 Given a sorted dictionary of an alien language having $N$ words and $k$ starting alphabets of standard dictionary. Find the order of characters in the alien language.
 https://practice.geeksforgeeks.org/problems/alien-dictionary/1#
+    
 ```
 Input: 
 N = 5, K = 4
@@ -1587,8 +1588,10 @@ Similarly we can find other orders.
 Prerequisite : Topological sorting. Here, from two adjacent element from the string array the character that came before is lexicographically smaller. So, we can have a directed graph whose parent node is bigger and child node is lexicographically smaller according to alien dictionary.
 
  $dict = {"baa","abcd","abca","cab","cad"}$ here, the directed graph looks like
-    b -> a -> c
-    b -> d -> a
+    ```
+    1. b -> a -> c
+    2. b -> d -> a
+    ```
 So, we can use dfs traversal and while backtracking we push back the last visited character into a string. Finally, we have our final string as decending order. We need to reverse the string to get our answer :) 
     
 </ul>
