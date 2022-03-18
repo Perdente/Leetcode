@@ -1512,4 +1512,54 @@ public:
 
 </ul>
 </details>
+    
+    
+   
+<details>
+<summary>Longest Consecutive Sequence</summary>
+<ul>
+Given an unsorted array of integers $nums$, return the length of the longest consecutive elements sequence.
+
+You must write an algorithm that runs in $O(n)$ time.
+
+Example 1:
+
+Input: nums = $[100,4,200,1,3,2]$
+Output: $4$
+Explanation: The longest consecutive elements sequence is $[1, 2, 3, 4]$. Therefore its length is $4$. 
+<details>
+<summary>Approach</summary>
+<ul>
+$[100,4,200,1,3,2] => [100] [200] [1, 2, 3, 4]$  Here, we need to figure out the start of the segment which is can be done by checking $st.count(val - 1)$ exists or not? Then, we count the sequence length and print the maximum of 'em.
+</ul>
+</details>
+
+<details>
+<summary>Code</summary>
+<ul>
+    
+```c++
+class Solution {
+public:
+    int longestConsecutive(vector<int>& nums) {
+        unordered_set<int> st(nums.begin(), nums.end());
+        int ma = 0;
+        for (auto it: nums) {
+            int cnt = 0;
+            if (!st.count(it - 1)) {
+                int temp = it;
+                while (st.count(temp)) cnt++, temp++;
+            }
+            ma = max(ma, cnt);
+        }
+        return ma;
+    }
+};
+```
+
+</ul>
+</details>
+
+</ul>
+</details>
  
