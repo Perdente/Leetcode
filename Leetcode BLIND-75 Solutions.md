@@ -1435,7 +1435,7 @@ public:
      
     
 <details>
-<summary>NUMBER OF ISLANDS</summary>
+<summary>Number of Islands</summary>
 <ul>
     Given an $m x n$ $2$D binary grid grid which represents a map of $'1'$s (land) and $'0'$s (water), return the number of islands.
 
