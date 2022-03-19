@@ -1718,3 +1718,116 @@ public:
 
 </ul>
 </details>
+    
+
+<details>
+<summary>Merge Intervals</summary>
+<ul>
+Given an array of intervals where $intervals[i] = [start_i, end_i]$, merge all overlapping intervals, and return an array of the non-overlapping intervals that cover all the intervals in the input.
+
+ 
+
+Example 1:
+
+Input: intervals = $[[1,3],[2,6],[8,10],[15,18]]$
+Output: $[[1,6],[8,10],[15,18]]$
+Explanation: Since intervals $[1,3]$ and $[2,6]$ overlaps, merge them into $[1,6]$.   
+<details>
+<summary>Approach</summary>
+<ul>
+In diary...
+</ul>
+</details>
+
+<details>
+<summary>Code</summary>
+<ul>
+    
+```c++
+// https://www.youtube.com/watch?v=_FkR5zMwHQ0
+class Solution {
+public:
+    vector<vector<int>> merge(vector<vector<int>>& intervals) {
+        vector<vector<int>> ans;
+        sort(intervals.begin(), intervals.end(), [](auto x, auto y){return x[0] < y[0];});
+        for (auto interval: intervals) {
+            if (ans.empty()) {
+                ans.push_back(interval);
+            } else {
+                vector<int> prev = ans.back();
+                if (interval[0] <= prev[1]) {
+                    ans.back()[1] = max(prev[1], interval[1]);
+                } else {
+                    ans.push_back(interval);
+                }
+            }
+        }
+        return ans;
+    }
+};
+```
+
+</ul>
+</details>
+
+</ul>
+</details>
+    
+    
+
+<details>
+<summary>Insert Interval</summary>
+<ul>
+You are given an array of non-overlapping intervals intervals where $intervals[i] = [start_i, end_i]$ represent the start and the end of the $i$th interval and intervals is sorted in ascending order by $start_i$. You are also given an interval $newInterval = [start, end]$ that represents the start and end of another interval.
+
+Insert $newInterval$ into intervals such that $intervals$ is still sorted in ascending order by $start_i$ and intervals still does not have any overlapping intervals (merge overlapping intervals if necessary).
+
+Return intervals after the insertion.
+ 
+
+Example 1:
+
+Input: intervals = $[[1,3],[6,9]]$, newInterval = $[2,5]$
+Output: $[[1,5],[6,9]]$   
+<details>
+<summary>Approach</summary>
+<ul>
+In diary :)
+</ul>
+</details>
+
+<details>
+<summary>Code</summary>
+<ul>
+    
+```c++
+class Solution {
+public:
+    vector<vector<int>> insert(vector<vector<int>>& intervals, vector<int>& newInterval) {
+        vector<vector<int>> ans;
+        int n = intervals.size(), i = 0;
+        while (i < n and intervals[i][0] <= newInterval[0]) {
+            ans.push_back(intervals[i++]);
+        }
+        if (ans.empty() or newInterval[0] > ans.back()[1]) ans.push_back(newInterval);
+        else {
+            ans.back()[1] = max(ans.back()[1], newInterval[1]);
+        }
+        while (i < n) {
+            if (intervals[i][0] <= ans.back()[1]) {
+                ans.back()[1] = max(ans.back()[1], intervals[i][1]);
+            } else {
+                ans.push_back(intervals[i]);
+            }
+            i++;
+        }
+        return ans;
+    }
+};
+```
+
+</ul>
+</details>
+
+</ul>
+</details>
