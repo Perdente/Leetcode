@@ -1831,3 +1831,53 @@ public:
 
 </ul>
 </details>
+    
+    
+    
+    
+<details>
+<summary>Non-overlapping Intervals</summary>
+<ul>
+ Given an array of intervals $intervals$ where $intervals[i] = [start_i, end_i]$, return the minimum number of intervals you need to remove to make the rest of the intervals non-overlapping.
+
+ 
+
+Example 1:
+
+Input: intervals = $[[1,2],[2,3],[3,4],[1,3]]$
+Output: $1$
+Explanation: $[1,3]$ can be removed and the rest of the intervals are non-overlapping. 
+<details>
+<summary>Approach</summary>
+<ul>
+In diary :)
+</ul>
+</details>
+
+<details>
+<summary>Code</summary>
+<ul>
+    
+```c++
+class Solution {
+public:
+    int eraseOverlapIntervals(vector<vector<int>>& intervals) {
+        sort(intervals.begin(), intervals.end(), [](auto &x, auto &y){ return (x[1] != y[1] ? x[1] < y[1] : x[0] > y[0]);});
+        vector<vector<int>> ans;
+        ans.push_back(intervals[0]);
+        for (int i = 1; i < (int)intervals.size(); ++i) {
+            vector<int> prev = ans.back();
+            if (intervals[i][0] >= prev[1]) {
+                ans.push_back(intervals[i]);
+            }
+        }
+        return (int) intervals.size() - ans.size();
+    }
+};
+```
+
+</ul>
+</details>
+
+</ul>
+</details>
