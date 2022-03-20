@@ -1943,7 +1943,7 @@ room2: $(5,10),(15,20)$
 <summary>Approach</summary>
 <ul>
 Prerequisite: minheap:)
-    Here, we first sort the intervals according to start time so that
+    Here, we first sort the intervals according to start time so that early meetings can be accessed earlier. Then, we maintain a min-heap and store the last meetings end time. If in $i$th meeting's start time is less than heap's end time that mean previous meeting hadn't been ended yet. So, we need a new meeting room, and thus we push new meeting's end time. Otherwise we can pop our previous meeting's end time from our $priorityqueue$ :)
 </ul>
 </details>
 
@@ -1952,7 +1952,45 @@ Prerequisite: minheap:)
 <ul>
     
 ```c++
+// https://www.lintcode.com/problem/919/
+/**
+ * Definition of Interval:
+ * classs Interval {
+ *     int start, end;
+ *     Interval(int start, int end) {
+ *         this->start = start;
+ *         this->end = end;
+ *     }
+ * }
+ */
 
+class Solution {
+public:
+    /**
+     * @param intervals: an array of meeting time intervals
+     * @return: the minimum number of conference rooms required
+     */
+    int minMeetingRooms(vector<Interval> &intervals) {
+        vector<vector<int>> v;
+        for (auto it: intervals) {
+            v.push_back({{it.start}, {it.end}});
+        }
+        sort(v.begin(), v.end());
+        priority_queue<int> pq;
+        for (auto it: v) {
+            cout << it[0] << " " << it[1] << '\n';
+        }
+        for (auto interval: v) {
+            if (pq.empty() or -pq.top() > interval[0]) {
+                pq.push(-interval[1]);
+            } else {
+                pq.pop();
+                pq.push(-interval[1]);
+            }
+        }
+        return (int) pq.size();
+    }
+};
 ```
 
 </ul>
@@ -1960,5 +1998,4 @@ Prerequisite: minheap:)
 
 </ul>
 </details>
-© 2022 GitHub, Inc.
-Terms
+
