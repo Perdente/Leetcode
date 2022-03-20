@@ -1927,3 +1927,38 @@ bool canAttendMeetings(vector<Interval> &intervals) {
 
 </ul>
 </details>
+
+    
+<details>
+<summary>Meeting Rooms II</summary>
+<ul>
+ Given an array of meeting time intervals consisting of start and end times [[s1,e1],[s2,e2],...] (si < ei), find the minimum number of conference rooms required.)
+Input: intervals = $[(0,30),(5,10),(15,20)]$
+Output: $2$
+Explanation:
+We need two meeting rooms
+room1: $(0,30)$
+room2: $(5,10),(15,20)$                                                                                                            
+<details>
+<summary>Approach</summary>
+<ul>
+Prerequisite: minheap:)
+    Here, we first sort the intervals according to start time so that
+</ul>
+</details>
+
+<details>
+<summary>Code</summary>
+<ul>
+    
+```c++
+
+```
+
+</ul>
+</details>
+
+</ul>
+</details>
+© 2022 GitHub, Inc.
+Terms
