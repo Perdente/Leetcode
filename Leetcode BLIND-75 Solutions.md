@@ -1881,3 +1881,49 @@ public:
 
 </ul>
 </details>
+    
+    
+<details>
+<summary>Meeting Rooms</summary>
+<ul>
+Given an array of meeting time intervals consisting of $start$ and $end$ times $[[s_1,e_1],[s_2,e_2],...]$ $(s_i < e_i)$, determine if a person could attend all meetings.
+Input: intervals = $[(0,30),(5,10),(15,20)]$
+Output: $false$
+Explanation: 
+$(0,30), (5,10)$ and $(0,30),(15,20)$ will conflict                                                                                                                                                                                            
+                                                                                                                         
+<details>
+<summary>Approach</summary>
+<ul>
+Similar to non - overlapping intervals :)
+</ul>
+</details>
+
+<details>
+<summary>Code</summary>
+<ul>
+    
+```c++
+bool canAttendMeetings(vector<Interval> &intervals) {
+        vector<vector<int>> v;
+        for (auto it: intervals) {
+            v.push_back({{it.start}, {it.end}});
+        }
+        if (v.empty()) return true;
+        sort(v.begin(), v.end(), [](auto &x, auto &y) {return x[1] != y[1] ? x[0] < y[0] : x[1] < y[1];});
+        vector<vector<int>> ans;
+        ans.push_back(v[0]);
+        for (int i = 1; i < (int) v.size(); ++i) {
+            vector<int> prev = ans.back();
+            if (v[i][0] < prev[1]) return false;
+            ans.push_back(v[i]);
+        }
+        return true;
+    }
+```
+
+</ul>
+</details>
+
+</ul>
+</details>
