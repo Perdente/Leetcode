@@ -2000,3 +2000,51 @@ public:
 </ul>
 </details>
 
+    
+    
+<details>
+<summary>Reverse Linked List</summary>
+<ul>
+    Given the head of a singly linked list, reverse the list, and return the reversed list.
+
+![](https://assets.leetcode.com/uploads/2021/02/19/rev1ex1.jpg) 
+
+Example 1:
+
+
+Input: head = $[1,2,3,4,5]$
+Output: $[5,4,3,2,1]$
+<details>
+<summary>Approach</summary>
+<ul>
+Here, main objective is to change the direction of the pointer.
+</ul>
+</details>
+
+<details>
+<summary>Code</summary>
+<ul>
+    
+```c++
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        ListNode *prev, *nxt, *current;
+        current = head;
+        prev = nullptr;
+        while (current != nullptr) {
+            nxt = current -> next;
+            current -> next = prev;
+            prev = current;
+            current = nxt;
+        }
+        return prev;
+    }
+};
+```
+
+</ul>
+</details>
+
+</ul>
+</details>    
