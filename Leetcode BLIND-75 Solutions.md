@@ -2097,3 +2097,101 @@ public:
 
 </ul>
 </details>
+    
+    
+<details>
+<summary>Merge Two Sorted Lists</summary>
+<ul>
+You are given the heads of two sorted linked lists $list1$ and $list2$.
+
+Merge the two lists in a one sorted list. The list should be made by splicing together the nodes of the first two lists.
+
+Return the head of the merged linked list. 
+    
+![](https://assets.leetcode.com/uploads/2020/10/03/merge_ex1.jpg)    
+Input: list1 = $[1,2,4]$, list2 = $[1,3,4]$
+Output: $[1,1,2,3,4,4]$   
+<details>
+<summary>Approach</summary>
+<ul>
+
+> Method 1: We create a new $dummy$ node which will point to our final $ans$ linked list. Then we iterate both the linked list. If $first -> val$ is less than $second -> val$ then we create a new node whose value is $first -> val$. Our $ans$ linked list now points to our new node. Similarly we do it for $second -> val$. If one list has already ended then we can take other linked list as it is.
+    
+> Method 2: We will use recursive method. We don't need to create new dummy node. Here, base case is when one list is empty then we can return other list.
+Or, if $list1 -> val$ is less or equal $list2 -> val$ then we call the $list1$ linked list or vice - versa.
+
+</ul>
+</details>
+
+<details>
+<summary>Method 1</summary>
+<ul>
+    
+```c++
+class Solution {
+public:
+    ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
+        ListNode *first = list1, *second = list2, *dummy = new ListNode(-101);
+        ListNode *ans = dummy;
+        if (first == NULL) return second;
+        if (second == NULL) return first;
+        while (first != NULL and second != NULL) {
+            ListNode* temp;
+            if (first -> val <= second -> val) {
+                temp = new ListNode(first -> val);
+                first = first -> next;
+                ans -> next = temp;
+                ans = temp;
+            } else {
+                temp = new ListNode(second -> val);
+                second = second -> next;
+                ans -> next = temp;
+                ans = temp;
+            }   
+        }
+        while (first != NULL) {
+            ListNode* temp = new ListNode(first -> val);
+            ans -> next = temp;
+            ans = temp;
+            first = first -> next;
+        } 
+        while (second != NULL) {
+            ListNode* temp = new ListNode(second -> val);
+            ans -> next = temp;
+            ans = temp;
+            second = second -> next;
+        }
+        return dummy -> next;
+    }
+};
+```
+
+</ul>
+</details>
+
+ <details>
+<summary>Method 2</summary>
+<ul>
+    
+```c++
+class Solution {
+public:
+    ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
+        if (list1 == NULL) return list2;
+        else if (list2 == NULL) return list1;
+        if (list1 -> val <= list2 -> val) {
+            list1 -> next = mergeTwoLists(list1 -> next, list2);
+            return list1;
+        } else {
+            list2 -> next = mergeTwoLists(list1, list2 -> next);
+            return list2;
+        }
+    }
+};    
+```
+
+</ul>
+</details>
+   
+</ul>
+</details>
