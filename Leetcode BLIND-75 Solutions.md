@@ -2201,17 +2201,22 @@ public:
 <summary>Longest Palindromic Substring</summary>
 <ul>
   Given a string $s$, return the longest palindromic substring in $s$.  
+Example 1:
+
+Input: s = $"babad"$
+Output: $"bab"$
+Explanation: $"aba"$ is also a valid answer.
 <details>
 <summary>Approach</summary>
 <ul>
 Here, $O(n^2)$ solution would be expanding from the $middle$. There are two cases.
     
 - case: $1$ When we've odd length of palindroms $(....cbabc...)$ then we iterate through the $mid$ element and see how far we can go to left and to right. 
-    if $(0 <= mid - x && mid + x < n)$ then we are inside the string and if both $mid - x$ and $mid + x$ character match each other then we can add this substring to our answer.
+    if $0 <= mid - x$ and $mid + x < n$ then we are inside the string and if both $mid - x$ and $mid + x$ character match each other then we can add this substring to our answer.
     
 - case: $2$ When we've even length of palindroms $(....cbaabc...)$ then we iterate through the $mid$ element and see how far we can go to left and to right. 
-    if $(0 <= mid - x + 1 && mid + x < n)$ then we are inside the string. Say our string is $baab$ and we are at $1st$ index. Now if $x = 1$ it will check 
-    $s[1 - 1 + 1] == s[1 + 1]$. Similarly we check for bigger substring that matches the description.
+    if $0 <= mid - x + 1$ and $mid + x < n$ then we are inside the string. Say our string is $baab$ and we are at $1st$ index. Now if $x = 1$ it will check 
+    $s[1 - 1 + 1] == s[1 + 1]$. Similarly we check for bigger substrings that match the description.
     
 </ul>
 </details>
