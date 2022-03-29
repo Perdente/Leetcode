@@ -2195,3 +2195,69 @@ public:
    
 </ul>
 </details>
+
+    
+ <details>
+<summary>Longest Palindromic Substring</summary>
+<ul>
+  Given a string $s$, return the longest palindromic substring in $s$.  
+<details>
+<summary>Approach</summary>
+<ul>
+Here, $O(n^2)$ solution would be expanding from the $middle$. There are two cases.
+    
+- case: $1$ When we've odd length of palindroms $(....cbabc...)$ then we iterate through the $mid$ element and see how far we can go to left and to right. 
+    if $(0 <= mid - x && mid + x < n)$ then we are inside the string and if both $mid - x$ and $mid + x$ character match each other then we can add this substring to our answer.
+    
+- case: $2$ When we've even length of palindroms $(....cbaabc...)$ then we iterate through the $mid$ element and see how far we can go to left and to right. 
+    if $(0 <= mid - x + 1 && mid + x < n)$ then we are inside the string. Say our string is $baab$ and we are at $1st$ index. Now if $x = 1$ it will check 
+    $s[1 - 1 + 1] == s[1 + 1]$. Similarly we check for bigger substring that matches the description.
+    
+</ul>
+</details>
+
+<details>
+<summary>Code</summary>
+<ul>
+    
+```c++
+class Solution {
+public:
+    string longestPalindrome(string s) {
+        int ma = 0;
+        string ans;
+        int n = s.size();
+        for (int mid = 0; mid < n; ++mid) {
+            for (int x = 0; 0 <= mid - x and mid + x < n; ++x) {
+                if (s[mid - x] != s[mid + x]) break;
+                int len = 2 * x + 1;
+                if (len > ma) {
+                    ma = len;
+                    ans = s.substr(mid - x, len);
+                }
+            }
+        }
+
+        for (int mid = 0; mid < n; ++mid) {
+            for (int x = 0; 0 <= mid - x + 1 and mid + x < n; ++x) {
+                if (s[mid - x + 1] != s[mid + x]) break;
+                int len = 2 * x;
+                if (len > ma) {
+                    ma = len;
+                    ans = s.substr(mid - x + 1, len);
+                }
+            }
+        }
+        return ans;
+    }
+};
+```
+
+</ul>
+</details>
+
+</ul>
+</details>   
+    
+    
+    
