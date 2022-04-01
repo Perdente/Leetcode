@@ -1,4 +1,6 @@
 
+
+## Array
 <details>
 <summary>Two Sum</summary>
 <ul>
@@ -518,9 +520,9 @@ public:
 </ul>
 </details>
     
-
+## Binary
 <details>
-<summary>Number of 1 Bits</summary>
+<summary>Number of $1$ Bits</summary>
 <ul>
     Write a function that takes an unsigned integer and returns the number of $'1'$ bits it has (also known as the Hamming weight).
 <details>
@@ -694,6 +696,7 @@ public:
 </ul>
 </details>
     
+## Dynamic Programming    
 <details>
 <summary>Climbing Stairs</summary>
 <ul>
@@ -1373,6 +1376,7 @@ public:
 </ul>
 </details>
   
+## Graph
 <details>
 <summary> Course Schedule</summary>
 <ul>
@@ -1720,13 +1724,11 @@ public:
 </ul>
 </details>
     
-
+## Intervals
 <details>
 <summary>Merge Intervals</summary>
 <ul>
 Given an array of intervals where $intervals[i] = [start_i, end_i]$, merge all overlapping intervals, and return an array of the non-overlapping intervals that cover all the intervals in the input.
-
- 
 
 Example 1:
 
@@ -2001,7 +2003,7 @@ public:
 </details>
 
     
-    
+## Linked-List    
 <details>
 <summary>Reverse Linked List</summary>
 <ul>
