@@ -1,5 +1,13 @@
 [Blind 75 LeetCode Questions](https://leetcode.com/discuss/general-discussion/460599/blind-75-leetcode-questions)
 
+- [Array](https://github.com/Perdente/Leetcode/blob/main/Leetcode%20BLIND-75%20Solutions.md#array)
+- [Binary](https://github.com/Perdente/Leetcode/blob/main/Leetcode%20BLIND-75%20Solutions.md#binary)
+- [Dynamic Programming](https://github.com/Perdente/Leetcode/blob/main/Leetcode%20BLIND-75%20Solutions.md#dynamic-programming)
+- [Graph](https://github.com/Perdente/Leetcode/blob/main/Leetcode%20BLIND-75%20Solutions.md#graph)
+- [Intervals](https://github.com/Perdente/Leetcode/blob/main/Leetcode%20BLIND-75%20Solutions.md#intervals)
+- [Linked List](https://github.com/Perdente/Leetcode/blob/main/Leetcode%20BLIND-75%20Solutions.md#linked-list)
+
+
 ## Array
 <details>
 <summary>Two Sum</summary>
